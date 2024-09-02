@@ -10,12 +10,12 @@ from streamlit_pdf_viewer import pdf_viewer
 
 #these are main classes your image is trained on
 #you can define the classes in alphabectical order
-PREDICTED_LABELS = ["lamborghini","mercedes","audi"]  # Edit 1
+PREDICTED_LABELS = ["Cars","ships"]  # edit 1
 PREDICTED_LABELS.sort()
 
 def get_prediction(image_data):
   #replace your image classification ai service URL
-  url = 'https://askai.aiclub.world/dfa52426-11e1-43d7-ab92-8505c57198a8'  #Edit 2-- get endpoint URL from navigator by deploying your onnx model
+  url = 'https://askai.aiclub.world/dfa52426-11e1-43d7-ab92-8505c57198a8'  #Edit 2
   r = requests.post(url, data=image_data)
   response = r.json()['predicted_label']
   score = r.json()['score']
@@ -23,9 +23,10 @@ def get_prediction(image_data):
   return response, score
 
 
+
 #setting up the title
 st.title("Welcome to Image Classifier Web App!")#change according to your project   #edit 3
-#st.title(":violet[_Welcome_ _to_ _Image_ _Classifier_ _Web_ _App_]")
+
 
 #creating the tabs for the web app
 
@@ -33,7 +34,7 @@ tab1, tab2 = st.tabs(["Make Prediction", "View Report"])
 
 with tab1:
   #setting up the title
-  st.header("Cars and Ships Image Classifier")#change according to your project   #Edit 3
+  st.header("Cars and Ships Image Classifier")#change according to your project   #edit 3
   #setting up the subheader
   st.subheader("File Uploader")#change according to your project
 
@@ -84,12 +85,10 @@ with tab2:
   st.header("My Report")
 
   #add github link
-  #st.link_button("My Github Repository", "URL of your guthub repo") #syntax
-
-  st.link_button("https://github.com/gayathri620", "https://github.com/gayathri620/Cars_classification") #Edit 4
+  st.link_button("https://github.com/gayathri620", "https://github.com/gayathri620/Cars_classification")
 
   # URL of the PDF file in the GitHub repository
-  # sample url -> "https://github.com/gayathri620/Cars_classification/blob/main/sample.pdf"
+  # sample url -> "https://raw.githubusercontent.com/yourusername/yourrepository/branch/yourfile.pdf"
   pdf_url = "https://raw.githubusercontent.com/gayathri620/Cars_classification/main/sample.pdf"
 
   # Fetch the PDF file from GitHub

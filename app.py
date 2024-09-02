@@ -90,7 +90,7 @@ with tab2:
 
   # URL of the PDF file in the GitHub repository
   # sample url -> "https://github.com/gayathri620/Cars_classification/blob/main/sample.pdf"
-  pdf_url = "https://github.com/gayathri620/Cars_classification/blob/main/sample.pdf"
+  pdf_url = "https://raw.githubusercontent.com/gayathri620/Cars_classification/main/sample.pdf"
 
   # Fetch the PDF file from GitHub
   response = requests.get(pdf_url)

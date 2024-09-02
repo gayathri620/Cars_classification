@@ -10,7 +10,7 @@ from streamlit_pdf_viewer import pdf_viewer
 
 #these are main classes your image is trained on
 #you can define the classes in alphabectical order
-PREDICTED_LABELS = ["Cars","ships"]  # edit 1
+PREDICTED_LABELS = ["lamborghini","mercedes","audi"]  # edit 1
 PREDICTED_LABELS.sort()
 
 def get_prediction(image_data):
@@ -34,7 +34,7 @@ tab1, tab2 = st.tabs(["Make Prediction", "View Report"])
 
 with tab1:
   #setting up the title
-  st.header("Cars and Ships Image Classifier")#change according to your project   #edit 3
+  st.header("Cars Image Classifier")#change according to your project   #edit 3
   #setting up the subheader
   st.subheader("File Uploader")#change according to your project
 

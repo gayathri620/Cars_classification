@@ -4,18 +4,17 @@ import requests
 import base64
 from PIL import Image
 import io
-from streamlit_pdf_viewer import pdf_viewer
-
 
 
 #these are main classes your image is trained on
 #you can define the classes in alphabectical order
-PREDICTED_LABELS = ["lamborghini","mercedes","audi"]  # edit 1
+PREDICTED_LABELS = ["mercedes","lamborghini","audi"]
 PREDICTED_LABELS.sort()
+
 
 def get_prediction(image_data):
   #replace your image classification ai service URL
-  url = 'https://askai.aiclub.world/dfa52426-11e1-43d7-ab92-8505c57198a8'  #Edit 2
+  url = 'https://askai.aiclub.world/8ef731b0-edee-40c2-b6df-ed0c6461d20e'
   r = requests.post(url, data=image_data)
   response = r.json()['predicted_label']
   score = r.json()['score']
@@ -23,24 +22,16 @@ def get_prediction(image_data):
   return response, score
 
 
+#creating the web app
 
 #setting up the title
-st.title("Welcome to Image Classifier Web App!")#change according to your project   #edit 3
+st.title("Legofigurine Image Classifier")#change according to your project
+#setting up the subheader
+st.subheader("File Uploader")#change according to your project
 
-
-#creating the tabs for the web app
-
-tab1, tab2 = st.tabs(["Make Prediction", "View Report"])
-
-with tab1:
-  #setting up the title
-  st.header("Cars Image Classifier")#change according to your project   #edit 3
-  #setting up the subheader
-  st.subheader("File Uploader")#change according to your project
-
-  #file uploader
-  image = st.file_uploader(label="Upload an image",accept_multiple_files=False, help="Upload an image to classify them")
-  if image:
+#file uploader
+image = st.file_uploader(label="Upload an image",accept_multiple_files=False, help="Upload an image to classify them")
+if image:
     #converting the image to bytes
     img = Image.open(image)
     buf = io.BytesIO()
@@ -76,33 +67,5 @@ with tab1:
     with col2:
       st.metric("Confidence Score", max(scores))
 
-
-
-
-with tab2:
-
-  # Title of the app
-  st.header("My Report")
-
-  #add github link
-  st.link_button("https://github.com/gayathri620", "https://github.com/gayathri620/Cars_classification")
-
-  # URL of the PDF file in the GitHub repository
-  # sample url -> "https://raw.githubusercontent.com/yourusername/yourrepository/branch/yourfile.pdf"
-  pdf_url = "https://raw.githubusercontent.com/gayathri620/Cars_classification/main/Car brand Identification.pdf"
-
-  # Fetch the PDF file from GitHub
-  response = requests.get(pdf_url)
-
-  # Check if the request was successful
-  if response.status_code == 200:
-    # Display the PDF in the Streamlit app
-    st.download_button(label="Download Report", data=response.content, file_name="downloaded.pdf")
-    if st.button("Show Report"):
-        with st.sidebar:
-            pdf_viewer(response.content)
-
-  else:
-    st.error("Failed to fetch PDF file. Please check the URL.")
 
 
